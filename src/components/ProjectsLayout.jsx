@@ -21,7 +21,7 @@ function ProjectsLayout() {
             <ProjectCard
               title="E-commerce Website"
               description="A MERN e-commerce platform with secure payments."
-              link="https://github.com/your-github/mern-ecommerce"
+              link="https://farm-in5g.onrender.com/"
               linkText="View on GitHub"
               extraLink="https://mern-demo.example.com"
               extraLinkText="Live Demo"
