@@ -4,8 +4,8 @@ import ProjectCard from './ProjectCard';
 function ProjectsLayout() {
   return (
     <section id="projects" className="section" style={{ paddingTop: '2rem' }}>
-      <div className="container" style={{ maxWidth: '1200px', color:"cyan" }}>
-        <h2 className="title has-text-centered is-size-3 mb-5">Browse My Portfolio</h2>
+      <div className="container" style={{ maxWidth: '1200px' }}>
+        <h2 className="title has-text-centered is-size-3 mb-5" style={{color:"green"}}>Browse My Portfolio</h2>
 
         <div className="columns is-multiline is-variable is-4 is-justify-content-center">
           <div className="column is-5">
