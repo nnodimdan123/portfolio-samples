@@ -93,7 +93,7 @@ function ResumeStepper() {
             </h3>
             <div className="columns">
               <div className="column">
-                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "cyan" }}>
+                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "green" }}>
                   Top Skills
                 </h4>
                 <ul>
@@ -113,7 +113,7 @@ function ResumeStepper() {
                 </ul>
               </div>
               <div className="column">
-                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "cyan" }}>
+                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "green" }}>
                   Certifications
                 </h4>
                 <ul>
@@ -174,7 +174,7 @@ function ResumeStepper() {
           style={{
             fontFamily: "Arial, sans-serif",
             color: "white",
-            background: "cyan",
+            background: "green",
             border: "none",
           }}
         >
@@ -193,7 +193,7 @@ function ResumeStepper() {
               height: "12px",
               borderRadius: "50%",
               margin: "0 6px",
-              background: idx === currentStep ? "cyan" : "#666",
+              background: idx === currentStep ? "green" : "#666",
               cursor: "pointer",
             }}
             onClick={() => setCurrentStep(idx)}
