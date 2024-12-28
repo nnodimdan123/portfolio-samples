@@ -9,88 +9,79 @@ function SideConsole({ scrollToSection }) {
   const [badges, setBadges] = useState([]);
   const [mode, setMode] = useState("Professional");
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
-    setMessages([...messages, { type: "user", text: input }]);
-    setInput("");
+    setMessages((prevMessages) => [...prevMessages, { type: "user", text: input }]);
+    setInput(""); // Clear input field
 
     setIsTyping(true);
-    setTimeout(() => {
-      const botReply = generateBotReply(input);
+
+    try {
+      const botReply = await getChatGPTResponse(input);
       setMessages((prevMessages) => [...prevMessages, { type: "bot", text: botReply }]);
+    } catch (error) {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "bot", text: "Sorry, I couldn't process that. Please try again!" },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
-  const generateBotReply = (userInput) => {
-    const lowerInput = userInput.toLowerCase();
+  const getChatGPTResponse = async (userInput) => {
+    // System message to define the assistant's context
+    const systemMessage = {
+      role: "system",
+      content:
+        "You are a virtual assistant for Daniel Nnodim, a Junior at Luther College majoring in Computer Science and Economics. " +
+        "Daniel has expertise in DevOps, web development, RPA, and financial analysis.",
+    };
 
-    if (lowerInput.includes("who is daniel")) {
-      unlockBadge("Explorer");
-      return "Daniel Nnodim is a Junior at Luther College, majoring in Computer Science and Economics. He has skills in DevOps, RPA, web development, and financial analysis.";
-    } else if (lowerInput.includes("projects")) {
+    // Check for keywords and scroll to relevant sections
+    if (userInput.toLowerCase().includes("projects")) {
       unlockBadge("Project Enthusiast");
-      scrollToSection("projects");
-      return (
-        "Daniel has worked on:\n" +
-        "- Finance Tracker: Budgeting and financial planning tool.\n" +
-        "- E-commerce Platform: Built using the MERN stack.\n" +
-        "- Currency Converter: Python-based CLI tool for real-time conversions."
-      );
-    } else if (lowerInput.includes("skills")) {
+      scrollToSection && scrollToSection("projects");
+      return "Navigating to Projects section...";
+    }
+
+    if (userInput.toLowerCase().includes("skills")) {
       unlockBadge("Skills Master");
-      scrollToSection("skills");
-      return (
-        "Daniel's top skills include:\n" +
-        "- Robotic Process Automation (RPA)\n" +
-        "- JavaScript for full-stack development\n" +
-        "- Python for backend and scripting\n" +
-        "- Economic analysis and forecasting"
-      );
-    } else if (lowerInput.includes("resume")) {
-      return '<a href="/resume.pdf" target="_blank">Download Daniel\'s resume here</a>.';
-    } else if (lowerInput.includes("contact")) {
-      return (
-        "Connect with Daniel here:\n" +
-        "- Instagram: [@nnodimdan](https://www.instagram.com/nnodimdan)\n" +
-        "- GitHub: [nnodimdan123](https://github.com/nnodimdan123)\n" +
-        "- LinkedIn: [nnodimdan](https://linkedin.com/in/nnodimdan)"
-      );
-    } else if (lowerInput.includes("achievements")) {
-      unlockBadge("High Achiever");
-      return (
-        "Achievements include:\n" +
-        "- Dean's List Recipient (2023)\n" +
-        "- Certified in Basic Life Support (BLS)\n" +
-        "- Certified in Mental Health First Aid\n" +
-        "- Active involvement in extracurricular activities."
-      );
-    } else if (lowerInput.includes("joke")) {
-      return "Why did the programmer quit their job? Because they didn't get arrays! 😂";
-    } else if (lowerInput.includes("mode")) {
-      return (
-        `Current mode: ${mode}. Available modes are:\n` +
-        "- Professional\n" +
-        "- Friendly\n" +
-        "- Quirky\nType 'Set mode to [your choice]' to switch."
-      );
-    } else if (lowerInput.includes("set mode to")) {
-      const newMode = userInput.split("set mode to")[1]?.trim();
-      if (["Professional", "Friendly", "Quirky"].includes(newMode)) {
-        setMode(newMode);
-        return `Mode changed to ${newMode}.`;
-      } else {
-        return "Invalid mode. Please choose Professional, Friendly, or Quirky.";
+      scrollToSection && scrollToSection("skills");
+      return "Navigating to Skills section...";
+    }
+
+    // API call to ChatGPT
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [systemMessage, { role: "user", content: userInput }],
+          max_tokens: 150,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
       }
-    } else {
-      return "I'm not sure how to respond to that. Try asking about projects, skills, or contact info!";
+
+      const data = await response.json();
+      return data.choices[0].message.content.trim();
+    } catch (error) {
+      console.error("Error fetching response:", error);
+      throw error;
     }
   };
 
   const unlockBadge = (badge) => {
     if (!badges.includes(badge)) {
-      setBadges([...badges, badge]);
+      setBadges((prevBadges) => [...prevBadges, badge]);
       setMessages((prevMessages) => [
         ...prevMessages,
         { type: "bot", text: `🎉 You've unlocked the '${badge}' badge!` },
@@ -100,7 +91,9 @@ function SideConsole({ scrollToSection }) {
 
   return (
     <div className="side-console">
-      <h2 style={{ fontFamily: "'Press Start 2P', cursive", marginBottom: "1rem" }}>Chat with Daniel's Assistant</h2>
+      <h2 style={{ fontFamily: "'Helvetica Neue', sans-serif", marginBottom: "1rem" }}>
+        Chat with Daniel's Assistant
+      </h2>
       <div style={{ maxHeight: "400px", overflowY: "auto", marginBottom: "1rem", paddingRight: "8px" }}>
         {messages.map((msg, idx) => (
           <div
@@ -127,7 +120,9 @@ function SideConsole({ scrollToSection }) {
           </div>
         ))}
         {isTyping && (
-          <div style={{ color: "#05ff82", fontStyle: "italic", marginBottom: "0.5rem" }}>🤖 Typing...</div>
+          <div style={{ color: "#05ff82", fontStyle: "italic", marginBottom: "0.5rem" }}>
+            🤖 Typing...
+          </div>
         )}
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
