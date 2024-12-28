@@ -36,7 +36,7 @@ function ResumeStepper() {
               <div
                 key={idx}
                 style={{
-                  borderBottom: "1px solid #444",
+                  borderBottom: "1px solid #FFFFFF",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
                   fontFamily: "Roboto, sans-serif",
@@ -67,7 +67,7 @@ function ResumeStepper() {
               <div
                 key={idx}
                 style={{
-                  borderBottom: "1px solid #444",
+                  borderBottom: "1px solid #FFFFFF",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
                   fontFamily: "Roboto, sans-serif",
