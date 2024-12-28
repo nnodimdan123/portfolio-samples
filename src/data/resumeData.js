@@ -35,7 +35,7 @@ const resumeData = {
       `,
     },
     {
-      company: "NNPC Limited",
+      company: "Luther College",
       role: "Summer Liaison Officer",
       dateRange: "June 2023 - August 2023",
       description: `
