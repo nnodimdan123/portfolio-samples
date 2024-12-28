@@ -43,7 +43,7 @@ function ResumeStepper() {
                   color: "#ccc",
                 }}
               >
-                <strong style={{ color: "cyan" }}>{exp.company}</strong> -{" "}
+                <strong style={{ color: "green" }}>{exp.company}</strong> -{" "}
                 <em style={{ color: "#f5f5f5" }}>{exp.role}</em>
                 <br />
                 <span style={{ color: "#bbb" }}>{exp.dateRange}</span>
@@ -76,7 +76,7 @@ function ResumeStepper() {
                   color: "#ccc",
                 }}
               >
-                <strong style={{ color: "cyan" }}>{edu.institution}</strong>
+                <strong style={{ color: "green" }}>{edu.institution}</strong>
                 <br />
                 <em style={{ color: "#f5f5f5" }}>{edu.degree}</em>
                 <br />
