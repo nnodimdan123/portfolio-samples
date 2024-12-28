@@ -1,10 +1,10 @@
 /* Light mode (space grey) and dark mode definitions */
 :root {
   /* SPACE GREY for "light mode" */
-  --bg-color: #2f2f2f;         /* Overall background */
-  --text-color: #f1f1f1;       /* Light text for contrast */
-  --panel-color: #3b3b3b;      /* Panel background */
-  --border-color: #5a5a5a;     /* Panel border color */
+  --bg-color: #2e2e2e;         /* Slightly lighter for better contrast */
+  --text-color: #f5f5f5;       /* Softer text for readability */
+  --panel-color: #393939;      /* Panel background */
+  --border-color: #4f4f4f;     /* Panel border color */
   --hero-bg: #2f2f2f;          /* Hero section background */
 
   /* Buttons */
@@ -12,21 +12,40 @@
   --button-text: #000;
   --button-hover-bg: #03e372;
   --button-hover-text: #000;
+
+  /* Badges */
+  --badge-bg: #444;
+  --badge-text: #fff;
+  --badge-unlocked-bg: #05ff82;
+  --badge-unlocked-text: #000;
+
+  /* Animations */
+  --typing-animation-color: #05ff82;
+  --hover-effect-color: rgba(5, 255, 130, 0.6);
 }
 
 :root.dark-mode {
   /* DARK MODE definitions */
-  --bg-color: #0f0f0f;         /* Dark overall background */
-  --text-color: #fff;          /* Light text for dark background */
-  --panel-color: #1c1c1c;      /* Darker panel background */
-  --border-color: #2a2a2a;     /* Panel border color */
-  --hero-bg: #111;             /* Hero section background */
+  --bg-color: #121212;         /* True black for dark mode */
+  --text-color: #e5e5e5;       /* Softer white text */
+  --panel-color: #1f1f1f;      /* Darker panel background */
+  --border-color: #333;        /* Panel border color */
+  --hero-bg: #1a1a1a;          /* Hero section background */
 
   /* Buttons */
   --button-bg: #05ff82;
   --button-text: #000;
   --button-hover-bg: #03e372;
   --button-hover-text: #000;
+
+  /* Badges */
+  --badge-bg: #2e2e2e;
+  --badge-text: #bbb;
+  --badge-unlocked-bg: #05ff82;
+  --badge-unlocked-text: #000;
+
+  /* Animations */
+  --typing-animation-color: #05ff82;
 }
 
 html, body {
@@ -35,7 +54,7 @@ html, body {
   background: var(--bg-color);
   color: var(--text-color);
   font-family: 'Inter', sans-serif;
-  transition: background 0.4s, color 0.4s;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 .my-app-layout {
@@ -46,56 +65,60 @@ html, body {
 .panel-like {
   background: var(--panel-color);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  transition: transform 0.4s, box-shadow 0.4s;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .panel-like:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px var(--hover-effect-color);
 }
 
 /* Project Cards */
 .project-card {
   background: var(--panel-color);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  transition: transform 0.4s, box-shadow 0.4s;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 6px 15px var(--hover-effect-color);
 }
 
 /* Hero Section */
 .hero-section {
   background: var(--hero-bg);
-  padding: 4rem 1rem;
+  padding: 5rem 1rem;
   text-align: center;
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-family: 'Press Start 2P', cursive;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  opacity: 0.8;
+  font-size: 1.4rem;
+  opacity: 0.85;
   margin-bottom: 2rem;
+}
+
+.highlight {
+  color: #05ff82;
 }
 
 /* Chatbot Container (Side Console) */
 .side-console {
   background: var(--panel-color);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 8px;
   min-height: 400px;
   padding: 1rem;
   margin-left: 1rem;
@@ -106,65 +129,85 @@ html, body {
 
 .console-line {
   font-family: 'Press Start 2P', cursive;
-  color: #05ff82;
+  color: var(--text-color);
   margin-bottom: 0.5rem;
   white-space: pre-wrap;
+}
+
+/* Typing Animation */
+@keyframes typing {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
+}
+
+.typing-indicator::after {
+  content: ".";
+  color: var(--typing-animation-color);
+  animation: typing 1s steps(3, end) infinite;
 }
 
 /* Chatbot Input and Buttons */
 .side-console input {
   width: calc(100% - 60px);
-  padding: 0.5rem;
+  padding: 0.7rem;
   margin-right: 0.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   background: var(--panel-color);
   color: var(--text-color);
 }
 
 .side-console button {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
   background-color: var(--button-bg);
   color: var(--button-text);
   border: none;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .side-console button:hover {
   background-color: var(--button-hover-bg);
   color: var(--button-hover-text);
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
-/* Resume Stepper */
-.resume-stepper {
-  background: var(--panel-color);
-  border: 1px solid var(--border-color);
+/* Badges Section */
+.badge {
+  display: inline-block;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  padding: 0.3rem 0.7rem;
   border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.step-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.step-content {
-  min-height: 200px;
-  margin-top: 1rem;
+.badge.unlocked {
+  background: var(--badge-unlocked-bg);
+  color: var(--badge-unlocked-text);
+  transform: scale(1.05);
 }
 
 /* Footer */
 .footer {
   background: var(--bg-color);
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
   text-align: center;
-  opacity: 0.8;
+  opacity: 0.85;
   border-top: 1px solid var(--border-color);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }

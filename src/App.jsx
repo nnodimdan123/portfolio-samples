@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import ProjectsLayout from "./components/ProjectsLayout";
@@ -8,40 +8,57 @@ import Footer from "./components/Footer";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [activeSection, setActiveSection] = useState("");
 
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark-mode");
   };
 
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   return (
     <>
-      {/* Navbar with dark mode toggle */}
-      <Navbar isDarkMode={isDarkMode} onDarkModeToggle={handleDarkModeToggle} />
+      <Navbar
+        isDarkMode={isDarkMode}
+        onDarkModeToggle={handleDarkModeToggle}
+        activeSection={activeSection}
+      />
 
-      {/* Hero Section */}
       <HeroSection />
 
-      {/* Main Layout: Two Columns */}
-      <section className="section" style={{ paddingTop: "2rem" }}>
+      <section id="projects" className="section" style={{ paddingTop: "2rem" }}>
         <div className="container" style={{ maxWidth: "1400px" }}>
           <div className="columns is-gapless">
-            {/* LEFT side: wide column for Projects + Resume */}
             <div className="column is-9">
               <ProjectsLayout />
               <ResumeStepper />
             </div>
-
-            {/* RIGHT side: narrower column for Console */}
             <div className="column is-3">
-              {/* Pass additional props if needed */}
               <SideConsole />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </>
   );

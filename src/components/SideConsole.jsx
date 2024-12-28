@@ -6,6 +6,8 @@ function SideConsole() {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [badges, setBadges] = useState([]); // To store unlocked badges
+  const [mode, setMode] = useState("Professional"); // Default personality mode
 
   // Handle user input submission
   const handleSend = () => {
@@ -29,11 +31,13 @@ function SideConsole() {
     const lowerInput = userInput.toLowerCase();
 
     if (lowerInput.includes("who is daniel") || lowerInput.includes("who are you")) {
+      unlockBadge("Explorer");
       return (
         "Daniel Nnodim is a Junior at Luther College, majoring in Computer Science and Economics. " +
         "He bridges tech and finance with expertise in DevOps, RPA, and web development."
       );
     } else if (lowerInput.includes("skills") || lowerInput.includes("what can you do")) {
+      unlockBadge("Skills Master");
       return (
         "Daniel's skills include:\n" +
         "- **Python**: Scripting and backend systems.\n" +
@@ -43,6 +47,7 @@ function SideConsole() {
         "- **DevOps**: CI/CD and automation."
       );
     } else if (lowerInput.includes("projects") || lowerInput.includes("what have you worked on")) {
+      unlockBadge("Project Enthusiast");
       return (
         "Daniel has worked on:\n" +
         "- **Finance Tracker**: A budgeting app.\n" +
@@ -52,21 +57,51 @@ function SideConsole() {
       );
     } else if (lowerInput.includes("finance tracker")) {
       return "The Finance Tracker helps manage budgets. Check it out here: https://sample-port.onrender.com/";
+    } else if (lowerInput.includes("resume")) {
+      return (
+        "You can download Daniel's resume here: " +
+        '<a href="/resume.pdf" target="_blank">Download Resume</a>'
+      );
     } else if (lowerInput.includes("contact")) {
       return (
-        "You can reach Daniel via:\n" +
-        "- **LinkedIn**: https://linkedin.com/in/daniel-nnodim\n" +
-        "- **Email**: nnodimdan@gmail.com"
+        "You can connect with Daniel here:\n" +
+        "- **Instagram**: [@nnodimdan](https://www.instagram.com/nnodimdan)\n" +
+        "- **GitHub**: [nnodimdan123](https://github.com/nnodimdan123)\n" +
+        "- **LinkedIn**: [nnodimdan](https://linkedin.com/in/nnodimdan)"
       );
-    } else if (lowerInput.includes("economics") || lowerInput.includes("finance")) {
+    } else if (lowerInput.includes("joke")) {
+      return "Why do programmers prefer dark mode? Because light attracts bugs!";
+    } else if (lowerInput.includes("mode")) {
       return (
-        "Daniel applies Computer Science to solve economic challenges. He's passionate about sustainability " +
-        "and the economic impact of climate change."
+        "Current mode: " +
+        mode +
+        ". You can change it to Professional, Friendly, or Quirky by typing 'Set mode to [your choice]'."
       );
+    } else if (lowerInput.includes("set mode to")) {
+      const newMode = userInput.split("set mode to")[1].trim();
+      if (["Professional", "Friendly", "Quirky"].includes(newMode)) {
+        setMode(newMode);
+        return `Mode changed to ${newMode}.`;
+      } else {
+        return "Invalid mode. Choose Professional, Friendly, or Quirky.";
+      }
     } else if (lowerInput.includes("hello") || lowerInput.includes("hi")) {
-      return "Hello! How can I assist you today? Ask about Daniel's projects, skills, or anything else!";
+      return mode === "Friendly"
+        ? "Hey there! How’s it going? 😊"
+        : "Hello! How can I assist you today? Ask about Daniel's projects, skills, or anything else!";
     } else {
       return "I'm not sure how to respond to that. Try asking about projects, skills, or contact info!";
+    }
+  };
+
+  // Unlock a badge
+  const unlockBadge = (badge) => {
+    if (!badges.includes(badge)) {
+      setBadges([...badges, badge]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "bot", text: `🎉 You've unlocked the '${badge}' badge!` },
+      ]);
     }
   };
 
@@ -142,6 +177,9 @@ function SideConsole() {
         >
           Send
         </button>
+      </div>
+      <div style={{ marginTop: "1rem", color: "#05ff82" }}>
+        <strong>Badges Unlocked:</strong> {badges.length > 0 ? badges.join(", ") : "None"}
       </div>
     </div>
   );
