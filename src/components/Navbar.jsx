@@ -11,7 +11,16 @@ function Navbar({ isDarkMode, onDarkModeToggle }) {
     <nav className="navbar" style={{ background: '#222', color: '#fff' }} role="navigation">
       {/* Brand Section */}
       <div className="navbar-brand">
-        <a className="navbar-item" href="#home" style={{ color: '#fff' }}>
+        <a
+          className="navbar-item"
+          href="#home"
+          style={{
+            color: '#fff',
+            transition: 'color 0.3s ease',
+          }}
+          onMouseEnter={(e) => (e.target.style.color = '#05ff82')}
+          onMouseLeave={(e) => (e.target.style.color = '#fff')}
+        >
           Daniel Nnodim
         </a>
         <button
@@ -35,10 +44,28 @@ function Navbar({ isDarkMode, onDarkModeToggle }) {
       {/* Menu Items */}
       <div className={`navbar-menu ${isMenuOpen ? 'is-active' : ''}`} style={{ background: '#222' }}>
         <div className="navbar-start">
-          <a className="navbar-item" href="#projects" style={{ color: '#fff' }}>
+          <a
+            className="navbar-item"
+            href="#projects"
+            style={{
+              color: '#fff',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.target.style.background = '#05ff82')}
+            onMouseLeave={(e) => (e.target.style.background = '#222')}
+          >
             Projects
           </a>
-          <a className="navbar-item" href="#resume" style={{ color: '#fff' }}>
+          <a
+            className="navbar-item"
+            href="#resume"
+            style={{
+              color: '#fff',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.target.style.background = '#05ff82')}
+            onMouseLeave={(e) => (e.target.style.background = '#222')}
+          >
             Resume
           </a>
         </div>
@@ -57,7 +84,12 @@ function Navbar({ isDarkMode, onDarkModeToggle }) {
             href="https://linkedin.com/in/nnodimdan"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#fff' }}
+            style={{
+              color: '#fff',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.target.style.color = '#05ff82')}
+            onMouseLeave={(e) => (e.target.style.color = '#fff')}
           >
             LinkedIn
           </a>

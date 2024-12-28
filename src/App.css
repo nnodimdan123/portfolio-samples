@@ -258,3 +258,37 @@ html, body {
     align-self: center;
   }
 }
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212; /* Dark background for loading screen */
+  z-index: 9999;
+}
+
+.loader-text {
+  font-size: 3rem;
+  font-family: "Press Start 2P", cursive;
+  color: #05ff82;
+  animation: fadeOut 2s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}

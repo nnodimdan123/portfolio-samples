@@ -5,8 +5,10 @@ import ProjectsLayout from "./components/ProjectsLayout";
 import ResumeStepper from "./components/ResumeStepper";
 import SideConsole from "./components/SideConsole";
 import Footer from "./components/Footer";
+import Loader from "./components/Loader";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true); // Loader state
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("");
 
@@ -14,6 +16,16 @@ function App() {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark-mode");
   };
+
+  useEffect(() => {
+    // Simulate loading time for the Loader component
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // 3 seconds
+
+    // Cleanup timer
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
@@ -34,6 +46,11 @@ function App() {
       sections.forEach((section) => observer.unobserve(section));
     };
   }, []);
+
+  // Render loader if still loading
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

@@ -43,7 +43,7 @@ function ResumeStepper() {
                   color: "#ccc",
                 }}
               >
-                <strong style={{ color: "green" }}>{exp.company}</strong> -{" "}
+                <strong style={{ color: "#05ff82" }}>{exp.company}</strong> -{" "}
                 <em style={{ color: "#f5f5f5" }}>{exp.role}</em>
                 <br />
                 <span style={{ color: "#bbb" }}>{exp.dateRange}</span>
@@ -76,7 +76,7 @@ function ResumeStepper() {
                   color: "#ccc",
                 }}
               >
-                <strong style={{ color: "green" }}>{edu.institution}</strong>
+                <strong style={{ color: "#05ff82" }}>{edu.institution}</strong>
                 <br />
                 <em style={{ color: "#f5f5f5" }}>{edu.degree}</em>
                 <br />
@@ -93,7 +93,7 @@ function ResumeStepper() {
             </h3>
             <div className="columns">
               <div className="column">
-                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "green" }}>
+                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "#05ff82" }}>
                   Top Skills
                 </h4>
                 <ul>
@@ -113,7 +113,7 @@ function ResumeStepper() {
                 </ul>
               </div>
               <div className="column">
-                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "green" }}>
+                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "#05ff82" }}>
                   Certifications
                 </h4>
                 <ul>
@@ -174,7 +174,7 @@ function ResumeStepper() {
           style={{
             fontFamily: "Arial, sans-serif",
             color: "white",
-            background: "green",
+            background: "#05ff82",
             border: "none",
           }}
         >
@@ -193,7 +193,7 @@ function ResumeStepper() {
               height: "12px",
               borderRadius: "50%",
               margin: "0 6px",
-              background: idx === currentStep ? "green" : "#666",
+              background: idx === currentStep ? "#05ff82" : "#666",
               cursor: "pointer",
             }}
             onClick={() => setCurrentStep(idx)}

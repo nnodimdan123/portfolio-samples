@@ -29,7 +29,7 @@ function ProjectCard({ title, description, image, link, linkText, extraLink, ext
             style={{
               padding: "0.5rem 1rem",
               borderRadius: "6px",
-              backgroundColor: "green",
+              backgroundColor: "#05ff82",
               color: "#fff",
               textDecoration: "none",
               transition: "background 0.3s",
