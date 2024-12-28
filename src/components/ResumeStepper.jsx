@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import resumeData from "../data/resumeData";
 
@@ -19,10 +18,10 @@ function ResumeStepper() {
       case 0: // Summary
         return (
           <div>
-            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+            <h3 className="is-size-4" style={{ fontFamily: "Arial, sans-serif", color: "white" }}>
               Summary
             </h3>
-            <p style={{ whiteSpace: "pre-line", fontFamily: "Roboto, sans-serif" }}>
+            <p style={{ whiteSpace: "pre-line", fontFamily: "Arial, sans-serif", color: "#ccc" }}>
               {resumeData.summary}
             </p>
           </div>
@@ -30,7 +29,7 @@ function ResumeStepper() {
       case 1: // Experience
         return (
           <div>
-            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+            <h3 className="is-size-4" style={{ fontFamily: "Arial, sans-serif", color: "white" }}>
               Experience
             </h3>
             {resumeData.experience.map((exp, idx) => (
@@ -40,12 +39,14 @@ function ResumeStepper() {
                   borderBottom: "1px solid #444",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
-                  fontFamily: "Roboto, sans-serif",
+                  fontFamily: "Arial, sans-serif",
+                  color: "#ccc",
                 }}
               >
-                <strong>{exp.company}</strong> - <em>{exp.role}</em>
+                <strong style={{ color: "cyan" }}>{exp.company}</strong> -{" "}
+                <em style={{ color: "#f5f5f5" }}>{exp.role}</em>
                 <br />
-                <span>{exp.dateRange}</span>
+                <span style={{ color: "#bbb" }}>{exp.dateRange}</span>
                 <br />
                 {exp.location && <span>{exp.location}</span>}
                 <br />
@@ -61,7 +62,7 @@ function ResumeStepper() {
       case 2: // Education
         return (
           <div>
-            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+            <h3 className="is-size-4" style={{ fontFamily: "Arial, sans-serif", color: "white" }}>
               Education
             </h3>
             {resumeData.education.map((edu, idx) => (
@@ -71,14 +72,15 @@ function ResumeStepper() {
                   borderBottom: "1px solid #444",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
-                  fontFamily: "Roboto, sans-serif",
+                  fontFamily: "Arial, sans-serif",
+                  color: "#ccc",
                 }}
               >
-                <strong>{edu.institution}</strong>
+                <strong style={{ color: "cyan" }}>{edu.institution}</strong>
                 <br />
-                <em>{edu.degree}</em>
+                <em style={{ color: "#f5f5f5" }}>{edu.degree}</em>
                 <br />
-                <span>{edu.dateRange}</span>
+                <span style={{ color: "#bbb" }}>{edu.dateRange}</span>
               </div>
             ))}
           </div>
@@ -86,12 +88,12 @@ function ResumeStepper() {
       case 3: // Skills & Certifications
         return (
           <div>
-            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+            <h3 className="is-size-4" style={{ fontFamily: "Arial, sans-serif", color: "white" }}>
               Skills & Certifications
             </h3>
             <div className="columns">
               <div className="column">
-                <h4 className="is-size-5" style={{ fontFamily: "Roboto, sans-serif" }}>
+                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "cyan" }}>
                   Top Skills
                 </h4>
                 <ul>
@@ -101,7 +103,8 @@ function ResumeStepper() {
                       style={{
                         listStyleType: "circle",
                         marginLeft: "1rem",
-                        fontFamily: "Roboto, sans-serif",
+                        fontFamily: "Arial, sans-serif",
+                        color: "#ccc",
                       }}
                     >
                       {skill}
@@ -110,7 +113,7 @@ function ResumeStepper() {
                 </ul>
               </div>
               <div className="column">
-                <h4 className="is-size-5" style={{ fontFamily: "Roboto, sans-serif" }}>
+                <h4 className="is-size-5" style={{ fontFamily: "Arial, sans-serif", color: "cyan" }}>
                   Certifications
                 </h4>
                 <ul>
@@ -120,7 +123,8 @@ function ResumeStepper() {
                       style={{
                         listStyleType: "circle",
                         marginLeft: "1rem",
-                        fontFamily: "Roboto, sans-serif",
+                        fontFamily: "Arial, sans-serif",
+                        color: "#ccc",
                       }}
                     >
                       {cert}
@@ -138,7 +142,14 @@ function ResumeStepper() {
 
   return (
     <div id="resume" className="resume-stepper">
-      <h2 className="title is-size-3 has-text-centered mb-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+      <h2
+        className="title is-size-3 has-text-centered mb-4"
+        style={{
+          fontFamily: "Arial, sans-serif",
+          color: "white",
+          textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+        }}
+      >
         Resume
       </h2>
 
@@ -148,14 +159,24 @@ function ResumeStepper() {
         <button
           className="button is-small is-dark"
           onClick={handlePrev}
-          style={{ fontFamily: "Roboto, sans-serif" }}
+          style={{
+            fontFamily: "Arial, sans-serif",
+            color: "white",
+            background: "#444",
+            border: "none",
+          }}
         >
           Prev
         </button>
         <button
           className="button is-small is-info"
           onClick={handleNext}
-          style={{ fontFamily: "Roboto, sans-serif" }}
+          style={{
+            fontFamily: "Arial, sans-serif",
+            color: "white",
+            background: "cyan",
+            border: "none",
+          }}
         >
           Next
         </button>
@@ -168,10 +189,10 @@ function ResumeStepper() {
             key={idx}
             style={{
               display: "inline-block",
-              width: "10px",
-              height: "10px",
+              width: "12px",
+              height: "12px",
               borderRadius: "50%",
-              margin: "0 5px",
+              margin: "0 6px",
               background: idx === currentStep ? "cyan" : "#666",
               cursor: "pointer",
             }}
