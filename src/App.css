@@ -1,125 +1,170 @@
-/* By default, let's assume "light mode" is a space grey,
-   then .dark-mode is the black/dark theme. */
+/* Light mode (space grey) and dark mode definitions */
+:root {
+  /* SPACE GREY for "light mode" */
+  --bg-color: #2f2f2f;         /* Overall background */
+  --text-color: #f1f1f1;       /* Light text for contrast */
+  --panel-color: #3b3b3b;      /* Panel background */
+  --border-color: #5a5a5a;     /* Panel border color */
+  --hero-bg: #2f2f2f;          /* Hero section background */
 
-   :root {
-    /* SPACE GREY for "light mode" */
-    --bg-color: #2f2f2f;         /* Overall background = space grey */
-    --text-color: #f1f1f1;       /* Light text for contrast on grey */
-    --panel-color: #3b3b3b;      /* Panel background = slightly lighter grey */
-    --border-color: #5a5a5a;     /* For borders around panels */
-    --hero-bg: #2f2f2f;          /* Hero uses same space grey */
-  
-    /* You can tweak if you want a slight difference in hero. 
-       e.g. --hero-bg: #383838 for a subtle contrast. */
-  }
-  
-  :root.dark-mode {
-    /* Original dark mode variables */
-    --bg-color: #0f0f0f;   
-    --text-color: #fff;
-    --panel-color: #1c1c1c;
-    --border-color: #2a2a2a;
-    --hero-bg: #111;
-  }
-  
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    transition: background 0.4s, color 0.4s;
-  }
-  
-  .my-app-layout {
-    margin-top: 2rem;
-  }
-  
-  /* Panel-like or card-like styling */
-  .panel-like {
-    background: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    transition: transform 0.4s, box-shadow 0.4s;
-  }
-  .panel-like:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-  }
-  
-  /* Projects Cards */
-  .project-card {
-    background: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    transition: transform 0.4s, box-shadow 0.4s;
-  }
-  .project-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-  }
-  
-  /* Hero */
-  .hero-section {
-    background: var(--hero-bg);
-    padding: 4rem 1rem;
-    text-align: center;
-  }
-  .hero-title {
-    font-size: 2.5rem;
-    font-family: 'Press Start 2P', cursive;
-    margin-bottom: 1rem;
-  }
-  .hero-subtitle {
-    font-size: 1.2rem;
-    opacity: 0.8;
-    margin-bottom: 2rem;
-  }
-  
-  /* Side Console */
-  .side-console {
-    background: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    min-height: 400px;
-    padding: 1rem;
-    margin-left: 1rem;
-  }
-  .console-line {
-    font-family: 'Press Start 2P', cursive;
-    color: #05ff82;
-    margin-bottom: 0.5rem;
-    white-space: pre-wrap;
-  }
-  
-  /* Resume Stepper */
-  .resume-stepper {
-    background: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1rem;
-    margin-bottom: 2rem;
-  }
-  .step-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  .step-content {
-    min-height: 200px;
-    margin-top: 1rem;
-  }
-  
-  /* Footer */
-  .footer {
-    background: var(--bg-color);
-    padding: 2rem 1rem;
-    text-align: center;
-    opacity: 0.8;
-  }
-  
+  /* Buttons */
+  --button-bg: #05ff82;
+  --button-text: #000;
+  --button-hover-bg: #03e372;
+  --button-hover-text: #000;
+}
+
+:root.dark-mode {
+  /* DARK MODE definitions */
+  --bg-color: #0f0f0f;         /* Dark overall background */
+  --text-color: #fff;          /* Light text for dark background */
+  --panel-color: #1c1c1c;      /* Darker panel background */
+  --border-color: #2a2a2a;     /* Panel border color */
+  --hero-bg: #111;             /* Hero section background */
+
+  /* Buttons */
+  --button-bg: #05ff82;
+  --button-text: #000;
+  --button-hover-bg: #03e372;
+  --button-hover-text: #000;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  transition: background 0.4s, color 0.4s;
+}
+
+.my-app-layout {
+  margin-top: 2rem;
+}
+
+/* Panel-like or card-like styling */
+.panel-like {
+  background: var(--panel-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.panel-like:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Project Cards */
+.project-card {
+  background: var(--panel-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Hero Section */
+.hero-section {
+  background: var(--hero-bg);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-family: 'Press Start 2P', cursive;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+/* Chatbot Container (Side Console) */
+.side-console {
+  background: var(--panel-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  min-height: 400px;
+  padding: 1rem;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.console-line {
+  font-family: 'Press Start 2P', cursive;
+  color: #05ff82;
+  margin-bottom: 0.5rem;
+  white-space: pre-wrap;
+}
+
+/* Chatbot Input and Buttons */
+.side-console input {
+  width: calc(100% - 60px);
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--panel-color);
+  color: var(--text-color);
+}
+
+.side-console button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.side-console button:hover {
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
+  transform: scale(1.05);
+}
+
+/* Resume Stepper */
+.resume-stepper {
+  background: var(--panel-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.step-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.step-content {
+  min-height: 200px;
+  margin-top: 1rem;
+}
+
+/* Footer */
+.footer {
+  background: var(--bg-color);
+  padding: 2rem 1rem;
+  text-align: center;
+  opacity: 0.8;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
