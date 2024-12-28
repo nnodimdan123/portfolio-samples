@@ -1,11 +1,11 @@
 /* Light mode (space grey) and dark mode definitions */
 :root {
-  /* SPACE GREY for "light mode" */
-  --bg-color: #2e2e2e;         /* Slightly lighter for better contrast */
-  --text-color: #f5f5f5;       /* Softer text for readability */
-  --panel-color: #393939;      /* Panel background */
-  --border-color: #4f4f4f;     /* Panel border color */
-  --hero-bg: #2f2f2f;          /* Hero section background */
+  /* Light Mode Variables */
+  --bg-color: #2e2e2e;          /* Light mode background */
+  --text-color: #f5f5f5;        /* Light mode text */
+  --panel-color: #393939;       /* Panels and cards */
+  --border-color: #4f4f4f;      /* Borders */
+  --hero-bg: #2f2f2f;           /* Hero section background */
 
   /* Buttons */
   --button-bg: #05ff82;
@@ -25,12 +25,12 @@
 }
 
 :root.dark-mode {
-  /* DARK MODE definitions */
-  --bg-color: #121212;         /* True black for dark mode */
-  --text-color: #e5e5e5;       /* Softer white text */
-  --panel-color: #1f1f1f;      /* Darker panel background */
-  --border-color: #333;        /* Panel border color */
-  --hero-bg: #1a1a1a;          /* Hero section background */
+  /* Dark Mode Variables */
+  --bg-color: #121212;          /* Dark mode background */
+  --text-color: #e5e5e5;        /* Softer white text */
+  --panel-color: #1f1f1f;       /* Darker panels and cards */
+  --border-color: #333;         /* Panel border color */
+  --hero-bg: #1a1a1a;           /* Hero section background */
 
   /* Buttons */
   --button-bg: #05ff82;
@@ -57,6 +57,7 @@ html, body {
   transition: background 0.4s ease, color 0.4s ease;
 }
 
+/* Layout Spacing */
 .my-app-layout {
   margin-top: 2rem;
 }
@@ -114,7 +115,7 @@ html, body {
   color: #05ff82;
 }
 
-/* Chatbot Container (Side Console) */
+/* Side Console (Chatbot) */
 .side-console {
   background: var(--panel-color);
   border: 1px solid var(--border-color);
@@ -210,4 +211,50 @@ html, body {
   border-top: 1px solid var(--border-color);
   font-size: 1rem;
   line-height: 1.5;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+  .side-console {
+    margin-left: 0;
+  }
+
+  .panel-like,
+  .project-card {
+    padding: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-burger {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--text-color);
+  }
+
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--panel-color);
+  }
+
+  .navbar-menu.is-active {
+    display: flex;
+  }
+
+  .navbar-end .button {
+    margin-top: 0.5rem;
+    align-self: center;
+  }
 }

@@ -14,7 +14,7 @@ function HeroSection() {
           Hello, I'm <span className="highlight">Daniel Nnodim</span>
         </h1>
         <p className="hero-subtitle" style={{ fontSize: '1.5rem', marginTop: '1rem' }}>
-          DevOps Intern @NNPC | CS & Econ Major @ Luther College
+          Software Engineer and Crypto Analyst | CS & Econ Major @ Luther College
         </p>
         <p className="status" style={{ fontSize: '1rem', fontStyle: 'italic', color: '#05ff82', marginTop: '0.5rem' }}>
           {availability}
