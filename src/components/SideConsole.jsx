@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 
-function SideConsole() {
+function SideConsole({ scrollToSection }) {
   const [messages, setMessages] = useState([
     { type: "bot", text: "Hi! I'm Daniel's Virtual Assistant. How can I assist you today?" },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [badges, setBadges] = useState([]); // To store unlocked badges
-  const [mode, setMode] = useState("Professional"); // Default personality mode
+  const [badges, setBadges] = useState([]);
+  const [mode, setMode] = useState("Professional");
 
-  // Handle user input submission
   const handleSend = () => {
     if (!input.trim()) return;
 
-    // Add user's message to the chat log
     setMessages([...messages, { type: "user", text: input }]);
-    setInput(""); // Clear input field
+    setInput("");
 
-    // Simulate bot typing delay
     setIsTyping(true);
     setTimeout(() => {
       const botReply = generateBotReply(input);
@@ -26,75 +23,71 @@ function SideConsole() {
     }, 1000);
   };
 
-  // Generate custom replies based on user input
   const generateBotReply = (userInput) => {
     const lowerInput = userInput.toLowerCase();
 
-    if (lowerInput.includes("who is daniel") || lowerInput.includes("who are you")) {
+    if (lowerInput.includes("who is daniel")) {
       unlockBadge("Explorer");
-      return (
-        "Daniel Nnodim is a Junior at Luther College, majoring in Computer Science and Economics. " +
-        "He bridges tech and finance with expertise in DevOps, RPA, and web development."
-      );
-    } else if (lowerInput.includes("skills") || lowerInput.includes("what can you do")) {
-      unlockBadge("Skills Master");
-      return (
-        "Daniel's skills include:\n" +
-        "- **Python**: Scripting and backend systems.\n" +
-        "- **JavaScript**: Frontend and full-stack development.\n" +
-        "- **Java**: Object-oriented programming.\n" +
-        "- **Economics**: Market analysis and forecasting.\n" +
-        "- **DevOps**: CI/CD and automation."
-      );
-    } else if (lowerInput.includes("projects") || lowerInput.includes("what have you worked on")) {
+      return "Daniel Nnodim is a Junior at Luther College, majoring in Computer Science and Economics. He has skills in DevOps, RPA, web development, and financial analysis.";
+    } else if (lowerInput.includes("projects")) {
       unlockBadge("Project Enthusiast");
+      scrollToSection("projects");
       return (
         "Daniel has worked on:\n" +
-        "- **Finance Tracker**: A budgeting app.\n" +
-        "- **E-commerce Platform**: Built using MERN stack.\n" +
-        "- **Tic Tac Toe**: A Python AI-based game.\n" +
-        "- **Currency Converter**: A Python CLI tool."
+        "- Finance Tracker: Budgeting and financial planning tool.\n" +
+        "- E-commerce Platform: Built using the MERN stack.\n" +
+        "- Currency Converter: Python-based CLI tool for real-time conversions."
       );
-    } else if (lowerInput.includes("finance tracker")) {
-      return "The Finance Tracker helps manage budgets. Check it out here: https://sample-port.onrender.com/";
-    } else if (lowerInput.includes("resume")) {
+    } else if (lowerInput.includes("skills")) {
+      unlockBadge("Skills Master");
+      scrollToSection("skills");
       return (
-        "You can download Daniel's resume here: " +
-        '<a href="/resume.pdf" target="_blank">Download Resume</a>'
+        "Daniel's top skills include:\n" +
+        "- Robotic Process Automation (RPA)\n" +
+        "- JavaScript for full-stack development\n" +
+        "- Python for backend and scripting\n" +
+        "- Economic analysis and forecasting"
       );
+    } else if (lowerInput.includes("resume")) {
+      return '<a href="/resume.pdf" target="_blank">Download Daniel\'s resume here</a>.';
     } else if (lowerInput.includes("contact")) {
       return (
-        "You can connect with Daniel here:\n" +
-        "- **Instagram**: [@nnodimdan](https://www.instagram.com/nnodimdan)\n" +
-        "- **GitHub**: [nnodimdan123](https://github.com/nnodimdan123)\n" +
-        "- **LinkedIn**: [nnodimdan](https://linkedin.com/in/nnodimdan)"
+        "Connect with Daniel here:\n" +
+        "- Instagram: [@nnodimdan](https://www.instagram.com/nnodimdan)\n" +
+        "- GitHub: [nnodimdan123](https://github.com/nnodimdan123)\n" +
+        "- LinkedIn: [nnodimdan](https://linkedin.com/in/nnodimdan)"
+      );
+    } else if (lowerInput.includes("achievements")) {
+      unlockBadge("High Achiever");
+      return (
+        "Achievements include:\n" +
+        "- Dean's List Recipient (2023)\n" +
+        "- Certified in Basic Life Support (BLS)\n" +
+        "- Certified in Mental Health First Aid\n" +
+        "- Active involvement in extracurricular activities."
       );
     } else if (lowerInput.includes("joke")) {
-      return "Why do programmers prefer dark mode? Because light attracts bugs!";
+      return "Why did the programmer quit their job? Because they didn't get arrays! 😂";
     } else if (lowerInput.includes("mode")) {
       return (
-        "Current mode: " +
-        mode +
-        ". You can change it to Professional, Friendly, or Quirky by typing 'Set mode to [your choice]'."
+        `Current mode: ${mode}. Available modes are:\n` +
+        "- Professional\n" +
+        "- Friendly\n" +
+        "- Quirky\nType 'Set mode to [your choice]' to switch."
       );
     } else if (lowerInput.includes("set mode to")) {
-      const newMode = userInput.split("set mode to")[1].trim();
+      const newMode = userInput.split("set mode to")[1]?.trim();
       if (["Professional", "Friendly", "Quirky"].includes(newMode)) {
         setMode(newMode);
         return `Mode changed to ${newMode}.`;
       } else {
-        return "Invalid mode. Choose Professional, Friendly, or Quirky.";
+        return "Invalid mode. Please choose Professional, Friendly, or Quirky.";
       }
-    } else if (lowerInput.includes("hello") || lowerInput.includes("hi")) {
-      return mode === "Friendly"
-        ? "Hey there! How’s it going? 😊"
-        : "Hello! How can I assist you today? Ask about Daniel's projects, skills, or anything else!";
     } else {
       return "I'm not sure how to respond to that. Try asking about projects, skills, or contact info!";
     }
   };
 
-  // Unlock a badge
   const unlockBadge = (badge) => {
     if (!badges.includes(badge)) {
       setBadges([...badges, badge]);
@@ -107,9 +100,7 @@ function SideConsole() {
 
   return (
     <div className="side-console">
-      <h2 style={{ fontFamily: "'Press Start 2P', cursive", marginBottom: "1rem" }}>
-        Chat with Daniel's Assistant
-      </h2>
+      <h2 style={{ fontFamily: "'Press Start 2P', cursive", marginBottom: "1rem" }}>Chat with Daniel's Assistant</h2>
       <div style={{ maxHeight: "400px", overflowY: "auto", marginBottom: "1rem", paddingRight: "8px" }}>
         {messages.map((msg, idx) => (
           <div
@@ -136,15 +127,7 @@ function SideConsole() {
           </div>
         ))}
         {isTyping && (
-          <div
-            style={{
-              color: "#05ff82",
-              fontStyle: "italic",
-              marginBottom: "0.5rem",
-            }}
-          >
-            🤖 Typing...
-          </div>
+          <div style={{ color: "#05ff82", fontStyle: "italic", marginBottom: "0.5rem" }}>🤖 Typing...</div>
         )}
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>

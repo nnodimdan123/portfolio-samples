@@ -18,14 +18,20 @@ function ResumeStepper() {
       case 0: // Summary
         return (
           <div>
-            <h3 className="is-size-4">Summary</h3>
-            <p style={{ whiteSpace: "pre-line" }}>{resumeData.summary}</p>
+            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+              Summary
+            </h3>
+            <p style={{ whiteSpace: "pre-line", fontFamily: "Roboto, sans-serif" }}>
+              {resumeData.summary}
+            </p>
           </div>
         );
       case 1: // Experience
         return (
           <div>
-            <h3 className="is-size-4">Experience</h3>
+            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+              Experience
+            </h3>
             {resumeData.experience.map((exp, idx) => (
               <div
                 key={idx}
@@ -33,6 +39,7 @@ function ResumeStepper() {
                   borderBottom: "1px solid #444",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
+                  fontFamily: "Roboto, sans-serif",
                 }}
               >
                 <strong>{exp.company}</strong> - <em>{exp.role}</em>
@@ -53,7 +60,9 @@ function ResumeStepper() {
       case 2: // Education
         return (
           <div>
-            <h3 className="is-size-4">Education</h3>
+            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+              Education
+            </h3>
             {resumeData.education.map((edu, idx) => (
               <div
                 key={idx}
@@ -61,6 +70,7 @@ function ResumeStepper() {
                   borderBottom: "1px solid #444",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
+                  fontFamily: "Roboto, sans-serif",
                 }}
               >
                 <strong>{edu.institution}</strong>
@@ -75,23 +85,43 @@ function ResumeStepper() {
       case 3: // Skills & Certifications
         return (
           <div>
-            <h3 className="is-size-4">Skills & Certifications</h3>
+            <h3 className="is-size-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+              Skills & Certifications
+            </h3>
             <div className="columns">
               <div className="column">
-                <h4 className="is-size-5">Top Skills</h4>
+                <h4 className="is-size-5" style={{ fontFamily: "Roboto, sans-serif" }}>
+                  Top Skills
+                </h4>
                 <ul>
                   {resumeData.topSkills.map((skill, idx) => (
-                    <li key={idx} style={{ listStyleType: "circle", marginLeft: "1rem" }}>
+                    <li
+                      key={idx}
+                      style={{
+                        listStyleType: "circle",
+                        marginLeft: "1rem",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
                       {skill}
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="column">
-                <h4 className="is-size-5">Certifications</h4>
+                <h4 className="is-size-5" style={{ fontFamily: "Roboto, sans-serif" }}>
+                  Certifications
+                </h4>
                 <ul>
                   {resumeData.certifications.map((cert, idx) => (
-                    <li key={idx} style={{ listStyleType: "circle", marginLeft: "1rem" }}>
+                    <li
+                      key={idx}
+                      style={{
+                        listStyleType: "circle",
+                        marginLeft: "1rem",
+                        fontFamily: "Roboto, sans-serif",
+                      }}
+                    >
                       {cert}
                     </li>
                   ))}
@@ -107,15 +137,25 @@ function ResumeStepper() {
 
   return (
     <div id="resume" className="resume-stepper">
-      <h2 className="title is-size-3 has-text-centered mb-4">Resume</h2>
+      <h2 className="title is-size-3 has-text-centered mb-4" style={{ fontFamily: "Roboto, sans-serif" }}>
+        Resume
+      </h2>
 
       <div className="step-content">{renderStepContent()}</div>
 
       <div className="step-buttons">
-        <button className="button is-small is-dark" onClick={handlePrev}>
+        <button
+          className="button is-small is-dark"
+          onClick={handlePrev}
+          style={{ fontFamily: "Roboto, sans-serif" }}
+        >
           Prev
         </button>
-        <button className="button is-small is-info" onClick={handleNext}>
+        <button
+          className="button is-small is-info"
+          onClick={handleNext}
+          style={{ fontFamily: "Roboto, sans-serif" }}
+        >
           Next
         </button>
       </div>
